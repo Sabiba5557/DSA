@@ -1,0 +1,16 @@
+void RemoveDuplicate()
+{
+    Node* temp=head;
+    while(temp->next!=NULL)
+    {
+        if(temp->data==temp->next->data)
+        {
+            Node* del=temp->next;
+            temp->next=temp->next->next;
+            delete del;
+        }
+        else{
+            temp=temp->next;
+        }
+    }
+}

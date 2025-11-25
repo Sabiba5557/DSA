@@ -1,0 +1,6 @@
+Extended eucleadian algorithm used to solve equation
+12x+10y=2      here gcd(12,10)=2
+                       gcd(10,2)=0
+                        gcd(2,0)=0
+2x+0y=2    here x=1,y=0
+10x+2y=2 here x=0,y=1{swapped value}

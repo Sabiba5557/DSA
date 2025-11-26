@@ -1,0 +1,99 @@
+//insertion
+#include<iostream>
+using namespace std;
+class Node
+{
+    public:
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int val)
+    {
+       data=val;
+       next=prev=NULL;
+    }
+} ;
+class List {
+    public:
+    Node* head;
+    Node* tail;
+    List()
+    {
+        head=tail=NULL;
+    }
+    void Push_front(int val)
+    {
+        Node* newNode=new Node(val);
+        if(head==NULL)
+        {
+            head=tail=newNode;
+            newNode->next=newNode->prev=newNode;
+        }
+        else{
+            newNode->next=head;
+            newNode->prev=tail;
+            head->prev=newNode;
+            tail->next=newNode;
+            head=newNode;
+        }
+    }
+    void Push_back(int val)
+    {
+        Node* newNode=new Node(val);
+        if(head==NULL)
+        {
+            head=tail=newNode;
+            newNode->next=newNode->prev=newNode;
+        }
+        else
+        {
+            newNode->next=head;
+            newNode->prev=tail;
+            head->prev=newNode;
+            tail->next=newNode;
+            tail=newNode;
+        }
+        
+    }
+    void Push_at(int pos,int val)
+    {
+        Node* newNode=new Node(val);
+        Node* temp=head;
+        int idx=1;
+            while(idx<pos-1 && temp!=tail)
+            {
+                temp=temp->next;
+                idx++;
+            }
+         Node* nextNode = temp->next;
+    newNode->next = nextNode;
+    newNode->prev = temp;
+    temp->next = newNode;
+    nextNode->prev = newNode;
+}
+
+    void Print()
+    {
+        Node* temp=head;
+        do
+        {
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        while(temp!=head);
+        cout<<endl;
+    }
+};
+int main()
+{
+    List ll;
+    ll.Push_front(3);
+    ll.Push_front(4);
+    ll.Push_front(7);
+    ll.Push_front(8);
+    ll.Push_front(9);
+    ll.Push_back(12);
+    ll.Print();
+    ll.Push_at(3,11);
+    ll.Print();
+}

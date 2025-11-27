@@ -4,3 +4,55 @@ Extended eucleadian algorithm used to solve equation
                         gcd(2,0)=0
 2x+0y=2    here x=1,y=0
 10x+2y=2 here x=0,y=1{swapped value}
+x=y1,
+y=x1-[12/10]y1
+  =x1-[a/b]y1
+Code:
+
+#include<iostream>
+using namespace std;
+
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
+void ex_gcd(int a, int b, int &x, int &y) {
+    if (b == 0) {
+        x = 1;
+        y = 0;
+        return;
+    }
+    int x1, y1;
+    ex_gcd(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - y1 * (a / b);
+}
+
+int main() {
+    int a, b, c;
+    cout << "Enter a, b, c for equation ax + by = c : ";
+    cin >> a >> b >> c;
+
+    int x, y;
+    ex_gcd(a, b, x, y);
+
+    int g = a * x + b * y;   // gcd(a,b)
+
+    if (c % g != 0) {
+        cout << "No integer solution exists.\n";
+        return 0;
+    }
+
+    int mul = c / g;
+    x *= mul;
+    y *= mul;
+
+    cout << "One solution:\n";
+    cout << "x = " << x << "\n";
+    cout << "y = " << y << "\n";
+
+    return 0;
+}
+
+

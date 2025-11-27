@@ -1,0 +1,132 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int val) {
+        data = val;
+        next = NULL;
+        prev = NULL;
+    }
+};
+class List {
+public:
+    Node* head;
+    Node* tail;
+    List() {
+        head = tail = NULL;
+    }
+    // ---------------- PUSH_BACK ------------------
+    void Push_back(int val) {
+        Node* newNode = new Node(val);
+        // empty list
+        if (head == NULL) {
+            head = tail = newNode;
+            head->next = head;
+            head->prev = head;
+            return;
+        }
+        // non-empty
+        newNode->prev = tail;
+        newNode->next = head;
+
+        tail->next = newNode;
+        head->prev = newNode;
+
+        tail = newNode;
+    }
+    // ---------------- POP_FRONT ------------------
+    void Pop_front() {
+        if (head == NULL)
+            return;
+        // only one node
+        if (head == tail) {
+            delete head;
+            head = tail = NULL;
+            return;
+        }
+        Node* temp = head;
+        head = head->next;
+        head->prev = tail;
+        tail->next = head;
+        delete temp;
+    }
+    // ---------------- POP_BACK ------------------
+    void Pop_back() {
+        if (head == NULL)
+            return;
+        // only one node
+        if (head == tail) {
+            delete head;
+            head = tail = NULL;
+            return;
+        }
+        Node* temp = tail;
+        tail = tail->prev;
+        tail->next = head;
+        head->prev = tail;
+        delete temp;
+    }
+    // ---------------- DELETE AT POSITION ------------------
+    void delete_at_position(int pos) {
+        if (head == NULL || pos <= 0)
+            return;
+        // delete first
+        if (pos == 1) {
+            Pop_front();
+            return;
+        }
+        Node* temp = head;
+        int count = 1;
+        // traverse
+        while (count < pos && temp->next != head) {
+            temp = temp->next;
+            count++;
+        }
+        // position out of range
+        if (count != pos)
+            return;
+        // last position
+        if (temp == tail) {
+            Pop_back();
+            return;
+        }
+        // middle node
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        delete temp;
+    }
+    // ---------------- PRINT ------------------
+    void Print() {
+        if (head == NULL) {
+            cout << "List is empty\n";
+            return;
+        }
+        Node* temp = head;
+        do {
+            cout << temp->data << " ";
+            temp = temp->next;
+        } while (temp != head);
+        cout << endl;
+    }
+};
+int main() {
+    List ll;
+    ll.Push_back(1);
+    ll.Push_back(11);
+    ll.Push_back(12);
+    ll.Push_back(13);
+    ll.Push_back(14);
+    ll.Push_back(15);
+    ll.Print();
+    ll.Pop_front();
+    ll.Print();
+    ll.Pop_back();
+    ll.Print();
+    ll.delete_at_position(3);
+    ll.Print();
+    return 0;
+}

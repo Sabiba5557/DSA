@@ -5,3 +5,21 @@ void Swap() {
             temp = temp->next->next;
         }
     }
+//Doubly Linked list
+ void Sort()
+    {
+        bool swapped=true;
+        while(swapped)
+        {
+            swapped=false;
+        Node* temp=head;
+        while(temp->next!=head){
+                    if(temp->data>temp->next->data)
+                    {
+                        swap(temp->data,temp->next->data);
+                        swapped=true;
+                    }
+                    temp=temp->next;
+                }
+            }
+    }

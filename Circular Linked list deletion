@@ -99,6 +99,22 @@ public:
         temp->next->prev = temp->prev;
         delete temp;
     }
+//----------- Remove duplicate-------------
+void Remove_duplicate()
+    {
+        Node* temp=head;
+        while(temp->next!=head)
+        {
+            if(temp->data==temp->next->data){
+                Node* dup=temp->next;
+                temp->next=dup->next;
+                dup->next->prev=temp;
+                delete dup;
+            }
+            temp=temp->next;
+        }
+    }
+        
     // ---------------- PRINT ------------------
     void Print() {
         if (head == NULL) {

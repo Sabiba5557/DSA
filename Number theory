@@ -91,5 +91,26 @@ for(int i=0;i<n;i++){
 if((gcd(i,n)==1) ans++;
 All numbers below a prime are coprime with it
 so phi(prime)=prime-1;
+phi(prime^ n)=prime^n -prime^ (n-1)//those no divided by that prime are excluded
 }
 // generate coprime for every no from 1 to n
+Multiplicative function:  phi(a) * phi(b)=phi(a*b)
+phi(n)=n* (1-1/pi)
+vector<int>phi_arr(N);
+void allPhi(){
+for(int i=1;i<N;i++) phi_arr[i]=i;
+for(int i=2;i<N;i++){
+if(phi_arr[i]!=i ) continue;
+for(int j=i;j<N;j+=i){
+phi_arr[j]/=i;
+phi_arr[j]*=(i-1);// * (i-1)/i;
+int main()
+{
+allPhi();
+int n;
+cin>>n;
+cout<<phi_arr[n]<<endl;
+}
+
+
+

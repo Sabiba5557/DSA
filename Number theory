@@ -111,6 +111,24 @@ int n;
 cin>>n;
 cout<<phi_arr[n]<<endl;
 }
+//Binary exponentiation
+a^n %p 
+a^n={  1   if n==0      
+      (a^n/2)^2    if n>0 && n even
+       (a^ n-1/2)^2 .a    if n>0 && n odd
+int bin_ex(int a,int b,int n)//a^b %m
+{
+if(b==0) return 1;
+if(b%2==1){
+return (bin_ex(a,b-1,m)*a )%m;
+}
+else{
+int res=bin_ex(a,b/2,m);
+return (res* res)% m;
+}
+Fermats little theorem
+if p is a prime number then a^p = a(mod p)
+
 
 
 

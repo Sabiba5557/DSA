@@ -128,7 +128,46 @@ return (res* res)% m;
 }
 Fermats little theorem
 if p is a prime number then a^p = a(mod p)
-
+//Generate prime upto N;
+#include<bits/stdc++.h>
+using namespace std;
+const int MAXN=100000;
+vector<int>primes;
+vector<bool>isPrime(MAXN,true);
+void sieve()
+{
+    isPrime[0]=isPrime[1]=false;
+    for(int i=2;i*i<MAXN;i++)
+    {
+        if(isPrime[i]){
+            for(int j=i*i;j<MAXN;j+=i)
+            {
+                isPrime[j]=false;
+            }
+        }
+        for(int i=2;i<MAXN;i++)
+        {
+            if(isPrime[i])
+            {
+                primes.push_back(i);
+            }
+        }
+    }
+}
+int main()
+{
+    sieve();
+    int N;
+    cin>>N;
+    for(int i=2;i<=N;i++)
+    {
+        if(isPrime[i]){
+            cout<<i<<" ";
+        }
+    }
+        cout<<endl;
+    
+}
 
 
 

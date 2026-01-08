@@ -1,0 +1,32 @@
+//Next greater element
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    vector<int>a(n);//input array
+    vector<int>ans(n);//to store answer
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    stack<int>st;
+    for(int i=n-1;i>=0;i--){//traverse from right
+        while(!st.empty() && st.top()<a[i])//pop smaller elements
+        {
+            st.pop();
+        }
+        if(st.empty()) ans[i]=-1;//no greater element
+        else{
+            ans[i]=st.top();//next greater element
+        }
+        st.push(a[i]);//push current element
+    }
+    for(int i=0;i<n;i++)//print answer
+    {
+        cout<<ans[i]<<" ";
+    }
+    cout<<endl;
+    return 0;
+}

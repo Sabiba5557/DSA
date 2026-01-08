@@ -68,4 +68,85 @@ int main() {
 ll.Print_even();
 ll.Print_odd();
 }
+//doubly_linked-list
+#include<bits/stdc++.h>
+using namespace std;
+class Node
+{
+    public:
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int val)
+    {
+    data=val;
+    next=prev=NULL;
+    }
+};
+class List {
+    public:
+    Node* head;
+    Node* tail;
+    List()
+    {
+        head=tail=NULL;
+    }
+    void push_back(int val)//insert at end
+    {
+        Node* newNode=new Node(val);
+        if(head==NULL)
+        {
+            head=tail=newNode;
+            return;
+        }
+        tail->next=newNode;//link current tail to newNode
+        newNode->prev=tail;
+        newNode->next=NULL;
+        tail=newNode;
+        
+    }
+    void even(){//insert sum of even numbers at end
+        Node* temp=head;
+        int s=0;
+        while(temp!=NULL)
+        {
+            if(temp->data%2==0)
+            {
+                cout<<temp->data<<" ";
+                s+=temp->data;
+            }
+            temp=temp->next;//move to next node
+        }
+            cout<<endl;
+            cout<<s<<endl;
+            push_back(s);//insert sum at end
+    }
+    void Print()
+    {
+        Node* temp=head;
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<" " ;
+            temp=temp->next;
+        }
+        cout<<endl;
+    }
+    
+    
+};
+int main()
+{
+    List l1,l2;
+    l1.push_back(1);
+    l1.push_back(3);
+    l1.push_back(4);
+    l1.push_back(5);
+    l2.push_back(2);
+    l2.push_back(6);
+    l1.push_back(9);
+    l1.Print();
+    l2.Print();
+    l1.even();
+    l1.Print();
+}
 
